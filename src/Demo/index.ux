@@ -4,6 +4,7 @@
     <text class="title">欢迎打开{{title}}</text>
     <!-- 点击跳转详情页 -->
     <input class="btn" type="button" value="跳转到详情页" onclick="routeDetail" />
+    <input class="btn" type="button" value="获取数据" onclick="request" />
   </div>
 </template>
 
@@ -32,6 +33,7 @@
 
 <script>
   import router from '@system.router'
+  import request from '../utils/request.js'
 
   export default {
     // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
@@ -43,6 +45,48 @@
       router.push ({
         uri: '/DemoDetail'
       })
+    },
+    request () {
+      // 跳转到应用内的某个页面，router用法详见：文档->接口->页面路由
+      console.error("TTTTTTTTTTTTTTTTTT");
+      //request.getGankDailyData('2018', '06', '19');
+      //request.getDayHistory();
+      //request.getGankData('Android', 1, 0)
+
+      var p = new Promise(function (resolve, reject) {
+        console.error('start new Promise...');
+        resolve(123);
+      });
+
+      p.then(this.multiply)
+      .then(this.add)
+      .then(this.multiply)
+      .then(this.add)
+      .then(function (result) {
+        console.error('Got value: ' + result);
+      });
+    },
+    multiply(input) {
+      return new Promise(function (resolve, reject) {
+        console.error('calculating ' + input + ' x ' + input + '...');
+        setTimeout(function(){
+          resolve(input * input)
+        },500)
+        //setTimeout(, 5000);
+        //resolve(input * input)
+      });
+    },
+
+    // 0.5秒后返回input+input的计算结果:
+    add(input) {
+      return new Promise(function (resolve, reject) {
+        console.error('calculating ' + input + ' + ' + input + '...');
+        setTimeout(function(){
+          resolve(input + input)
+        },500)
+        //setTimeout(resolve( input + input), 5000);
+        //resolve(input + input)
+      });
     }
   }
 </script>

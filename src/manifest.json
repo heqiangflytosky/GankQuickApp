@@ -8,17 +8,22 @@
   "features": [
     { "name": "system.prompt" },
     { "name": "system.router" },
-    { "name": "system.shortcut" }
+    { "name": "system.shortcut" },
+    { "name": "system.fetch" },
+    {"name": "system.network"}
   ],
   "permissions": [
     { "origin": "*" }
   ],
   "config": {
-    "logLevel": "off"
+    "logLevel": "debug"
   },
   "router": {
-    "entry": "Demo",
+    "entry": "Home",
     "pages": {
+      "Home": {
+        "component": "index"
+      },
       "Demo": {
         "component": "index"
       },
@@ -31,10 +36,15 @@
     }
   },
   "display": {
+
     "titleBarBackgroundColor": "#f2f2f2",
     "titleBarTextColor": "#414141",
     "menu": true,
     "pages": {
+      "Home": {
+        "titleBar": false,
+        "titleBarBackgroundColor": "#508aeb"
+      },
       "Demo": {
         "titleBarText": "示例页",
         "menu": false

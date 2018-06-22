@@ -19,6 +19,7 @@
 </style>
 
 <script>
+  import request from '../utils/request.js'
   export default {
     private: {
       text: '欢迎打开详情页'

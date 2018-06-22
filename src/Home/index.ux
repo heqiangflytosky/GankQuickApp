@@ -1,0 +1,100 @@
+<import name="tab-content-item" src="../views/tab-content-section"></import>
+<template>
+  <div class="home-page">
+    <tabs onchange="onChangeTabIndex">
+      <tab-bar class="tab-bar" mode="scrollable">
+        <text for="{{tabHeadList}}" class="{{currentIndex === $idx ? 'active' : ''}}" >{{$item.title}}</text>
+      </tab-bar>
+
+      <tab-content  class="tab-content">
+        <div class="tab-content-section" for="{{tabHeadList}}">
+          <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" itemdata="{{tabHeadList[$idx]}}"></tab-content-item>
+        </div>
+      </tab-content>
+    </tabs>
+  </div>
+</template>
+
+<style>
+  .home-page {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tab-bar {
+    height: 100px;
+    border: 0px solid #eeeeee;
+    border-bottom-width: 1px;
+    background-color: #508aeb;
+  }
+  .tab-bar text {
+    flex-grow: 1;
+    text-align: center;
+    margin: 10px;
+    color: rgba(255,255,255,0.6);
+    width: 150px;
+  }
+  .tab-bar .active {
+    color: #ffffff;
+  }
+  .tab-content {
+    flex: 1;
+    background-color: #eeeeee;
+  }
+
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .btn {
+    width: 550px;
+    height: 86px;
+    margin-top: 75px;
+    border-radius: 43px;
+    background-color: #09ba07;
+    font-size: 30px;
+    color: #ffffff;
+  }
+</style>
+
+<script>
+  import fetch from '@system.fetch'
+  import prompt from '@system.prompt'
+  import request from '../utils/request.js'
+  import gankCategory from '../data/GankCategory.js'
+
+  export default {
+    // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
+    private: {
+      tabHeadList: [
+        {title: gankCategory.CATEGORY_DAILY},
+        {title: gankCategory.CATEGORY_ANDROID},
+        {title: gankCategory.CATEGORY_IOS},
+        {title: gankCategory.CATEGORY_WEB},
+        {title: gankCategory.CATEGORY_APP},
+        {title: gankCategory.CATEGORY_EXPAND_RES}
+      ],
+      currentIndex: 0
+    },
+    onInit() {
+      this.changeTabIndex(0)
+      
+    },
+
+    changeTabIndex(index) {
+      const item = Object.assign({}, this.tabHeadList[index])
+      item.render = true
+      this.tabHeadList.splice(index, 1, item)
+    },
+    onChangeTabIndex (evt) {
+      this.currentIndex = evt.index
+      this.changeTabIndex(evt.index)
+    },
+    renderTabContent (index) {
+      return !!this.tabHeadList[index].render
+    }
+  }
+</script>
