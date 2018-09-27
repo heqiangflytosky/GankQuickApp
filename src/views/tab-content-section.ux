@@ -1,6 +1,6 @@
 <template>
   <div class="tab-section">
-    <text>{{contentdesc.title}}</text>
+    <text>{{contentdesc}}</text>
 
     <list class="list-content">
           <list-item type="listItem" class="item item-color" for="value in listdata">
