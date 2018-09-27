@@ -8,7 +8,7 @@
 
       <tab-content  class="tab-content">
         <div class="tab-content-section" for="{{tabHeadList}}">
-          <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" itemdata="{{tabHeadList[$idx]}}"></tab-content-item>
+          <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" contentdesc="{{tabHeadList[$idx]}}" listdata="{{list}}"></tab-content-item>
         </div>
       </tab-content>
     </tabs>
@@ -77,17 +77,38 @@
         {title: gankCategory.CATEGORY_APP},
         {title: gankCategory.CATEGORY_EXPAND_RES}
       ],
-      currentIndex: 0
+      currentIndex: 0,
+      list: ['A', 'B', 'C', 'D', 'E'],
+      gankData:[],
+      currentData:[],
     },
     onInit() {
+      for(var x in this.tabHeadList){
+        //var data = new Array()
+        var t = this.tabHeadList[x].title
+        this.gankData.push({name:t,value:new Array()});
+      }
       this.changeTabIndex(0)
-      
+
     },
 
     changeTabIndex(index) {
       const item = Object.assign({}, this.tabHeadList[index])
+      if (!item.render) {
+        this.getData(index)
+      }
       item.render = true
       this.tabHeadList.splice(index, 1, item)
+
+
+      for(var x in this.gankData){
+        var name = this.gankData[x].name;
+        console.log('init title =' +item.title+',name = '+ name)
+        if(name === item.title){
+          this.list = this.gankData[x].value;
+          break;
+        }
+      }
     },
     onChangeTabIndex (evt) {
       this.currentIndex = evt.index
@@ -95,6 +116,48 @@
     },
     renderTabContent (index) {
       return !!this.tabHeadList[index].render
+    },
+    getData(index) {
+        let root = this
+        var title = this.tabHeadList[index].title
+        console.log(`当前显示 ${title}`)
+        if (title === gankCategory.CATEGORY_DAILY) {
+            console.log(`当前显示TTTTTTTTT`)
+        } else {
+            request.getGankData(title, 2, 0)
+            .then(function(value) {
+                console.log(`拿到数据了：`)
+                console.log(value)
+                console.log(JSON.stringify(value.data))
+                var data = JSON.parse(value.data)
+                //console.log(value.data.results)
+                console.log('长度： '+data.results.length)
+                root.setData(title, data)
+
+              },
+              function(error) {
+
+              })
+        }
+    },
+    setData(title, data) {
+      var curdata;
+      for(var x in this.gankData){
+        var name = this.gankData[x].name;
+        console.log('title =' +title+',name = '+ name)
+        if(name === title){
+          for(var t in data.results){
+            console.log('t =' +t+',data = '+ data.results[t])
+            this.gankData[x].value.push(data.results[t]);
+          }
+          return;
+        }
+      }
+
+      // let currentElement = {};
+      // currentElement["name"] = name;
+      // currentElement["value"] = [];
+      // this.gankData.push(currentElement);
     }
   }
 </script>

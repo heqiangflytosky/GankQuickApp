@@ -1,38 +1,10 @@
 <template>
   <div class="demo-page">
-    <!-- 应用图标 -->
-    <image id="icon" src="{{icon}}"></image>
-
-    <!-- 应用名 -->
-    <text id="name">{{name}}</text>
-
-    <!-- 应用标签 -->
-    <div id="tags">
-      <text class="tag">无安装</text>
-      <text class="gap">|</text>
-      <text class="tag">体积小</text>
-      <text class="gap">|</text>
-      <text class="tag">一步直达</text>
-    </div>
-
-    <!-- 应用描述 -->
-    <text id="desc">{{desc}}</text>
-
-    <!-- 应用详情 -->
-    <div class="detail detail-first">
-      <text class="detail-title">服务类型</text>
-      <text class="detail-content">{{serviceType}}</text>
-    </div>
-    <div class="detail">
-      <text class="detail-title">主体信息</text>
-      <text class="detail-content">{{subjectInfo}}</text>
-    </div>
-
-    <!-- 创建快捷方式 -->
-    <input class="btn" type="button" onclick="createShortcut" value="创建快捷方式" />
-
-    <!-- 版权信息 -->
-    <text id="footer">{{copyright}}</text>
+    <list class="list-content">
+        <list-item type="listItem" class="item item-color" for="{{listData}}">
+            <text class="txt">{{$item}}--{{$idx}}</text>
+        </list-item>
+    </list>
   </div>
 </template>
 
@@ -41,96 +13,21 @@
     flex-direction: column;
     align-items: center;
   }
-
-  /* 应用图标 */
-  #icon {
-    margin-top: 90px;
-    width: 134px;
-    height: 134px;
-    border-radius: 10px;
-    border: 1px solid #8d8d8d;
-  }
-
-  /* 应用名 */
-  #name {
-    margin-top: 20px;
-    font-size: 36px;
-    color: #000000;
-  }
-
-  /* 应用标签 */
-  #tags {
-    margin-top: 22px;
-    align-items: center;
-  }
-
-  .tag {
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 28px;
-    color: #2a9700;
-  }
-
-  .gap {
-    font-size: 22px;
-    color: #b2b2b2;
-  }
-
-  /* 应用描述 */
-  #desc {
-    width: 650px;
-    margin-top: 40px;
-    line-height: 35px;
-    font-size: 25px;
-    color: #8d8d8d;
-  }
-
-  /* 应用详情 */
-  .detail {
-    width: 650px;
-    height: 90px;
-    border-bottom-width: 1px;
-    border-bottom-color: #f0f0f0;
-  }
-
-  .detail-first {
-    margin-top: 65px;
-    border-top-width: 1px;
-    border-top-color: #f0f0f0;
-  }
-
-  .detail-title {
-    width: 160px;
-    padding-left: 10px;
-    font-size: 25px;
-    color: #000000;
-  }
-
-  .detail-content {
-    font-size: 25px;
-    color: #8d8d8d;
-  }
-
-  /* 按钮 */
-  .btn {
-    width: 550px;
-    height: 86px;
-    margin-top: 75px;
-    border-radius: 43px;
-    background-color: #09ba07;
-    font-size: 30px;
-    color: #ffffff;
-  }
-
-  /* 底部版权信息 */
-  #footer {
-    width: 750px;
-    position: fixed;
-    bottom: 55px;
-    font-size: 25px;
-    color: #8d8d8d;
-    text-align: center;
-  }
+  .list-content {
+      flex: 1;
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+    .item {
+      height: 150px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    .item-color {
+      background-color: #f76160;
+    }
+ 
 </style>
 
 <script>
@@ -143,22 +40,15 @@
    */
   export default {
     protected: {
-      name: null,
-      icon: null
+
     },
     private: {
-      desc: '即点即用，让你省去下载安装的步骤，立即使用各类服务',
-      serviceType: '工具类',
-      subjectInfo: 'xxx有限公司',
-      copyright: ''
+      listData:['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     },
     onInit () {
       // 设置标题栏
       this.$page.setTitleBar({ text: this.name })
     },
-    createShortcut () {
-      // 创建快捷方式
-      this.$app.$def.createShortcut()
-    }
+
   }
 </script>
