@@ -5,7 +5,7 @@
       <image src="/Common/ic_content_from.png"></image>
       <text>{{itemWho}}</text>
       <image src="/Common/ic_content_time.png" style="margin-left: 12px;"></image>
-      <text>{{itemPublishedAt}}</text>
+      <text>{{this.formatPublishedTime(itemPublishedAt)}}</text>
     </div>
     <text class="gank-item-divider"></text>
   </div>
@@ -64,6 +64,42 @@
         'itemDes',
         'itemPublishedAt',
         'itemWho'
-    ]
+    ],
+    formatPublishedTime(time) {
+        // time 日期格式：2018-09-19T00:00:00.0Z
+        // UTC 格式
+
+        var cDate = new Date();
+        var curYear = cDate.getFullYear();
+        var curMonth = cDate.getMonth();
+        var curDate = cDate.getDate();
+        var curHour = cDate.getHours();
+        var curMin = cDate.getMinutes();
+        var curSec = cDate.getSeconds();
+
+        var pDate = new Date(Date.parse(time));
+        var pubYear = pDate.getFullYear();
+        var pubMonth = pDate.getMonth();
+        var pubDate = pDate.getDate();
+        var pubHour = pDate.getHours();
+        var pubMin = pDate.getMinutes();
+        var pubSec = pDate.getSeconds();
+
+        if (pubYear < curYear) {
+            return (curYear - pubYear) + "年前";
+        } else if (pubMonth < curMonth) {
+            return (curMonth - pubMonth) + "个月前";
+        } else if (pubDate < curDate) {
+            return (curDate - pubDate) + "天前";
+        } else if (pubHour < curHour) {
+            return (curHour - pubHour) + "小时前";
+        } else if (pubMin < curMin) {
+            return (curMin - pubMin) + "分钟前";
+        } else if (pubSec < curSec) {
+            return (curSec - pubSec) + "秒前";
+        } else {
+            return "刚刚";
+        }
+    }
   }
 </script>
