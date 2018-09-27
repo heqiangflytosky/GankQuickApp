@@ -43,21 +43,6 @@
     flex: 1;
     background-color: #eeeeee;
   }
-
-  .title {
-    font-size: 40px;
-    text-align: center;
-  }
-
-  .btn {
-    width: 550px;
-    height: 86px;
-    margin-top: 75px;
-    border-radius: 43px;
-    background-color: #09ba07;
-    font-size: 30px;
-    color: #ffffff;
-  }
 </style>
 
 <script>
@@ -70,7 +55,7 @@
     // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
     private: {
       tabHeadList: [
-        {title: gankCategory.CATEGORY_DAILY},
+        // {title: gankCategory.CATEGORY_DAILY},
         {title: gankCategory.CATEGORY_ANDROID},
         {title: gankCategory.CATEGORY_IOS},
         {title: gankCategory.CATEGORY_WEB},
@@ -119,12 +104,12 @@
     },
     getData(index) {
         let root = this
-        var title = this.tabHeadList[index].title
+        var title = this.gankData[index].name
         console.log(`当前显示 ${title}`)
         if (title === gankCategory.CATEGORY_DAILY) {
             console.log(`当前显示TTTTTTTTT`)
         } else {
-            request.getGankData(title, 2, 0)
+            request.getGankData(title, 10, 0)
             .then(function(value) {
                 console.log(`拿到数据了：`)
                 console.log(value)

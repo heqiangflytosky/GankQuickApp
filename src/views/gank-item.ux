@@ -1,0 +1,69 @@
+<template>
+  <div class="gank-item-root">
+    <text class="gank-item-title">{{itemDes}}</text>
+    <div class="gank-item-des">
+      <image src="/Common/ic_content_from.png"></image>
+      <text>{{itemWho}}</text>
+      <image src="/Common/ic_content_time.png" style="margin-left: 12px;"></image>
+      <text>{{itemPublishedAt}}</text>
+    </div>
+    <text class="gank-item-divider"></text>
+  </div>
+</template>
+
+<style>
+  .gank-item-root {
+    flex-direction: column;
+    height: 150px;
+    flex: 1;
+
+  }
+  .gank-item-title {
+    flex-direction: column;
+    flex: 1;
+    lines: 2;
+    color: #000000;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 0px;
+    margin-left: 24px;
+    margin-right: 24px;
+    font-size: 32px;
+  }
+  .gank-item-des {
+    flex-direction: row;
+    margin-left: 24px;
+    margin-right: 24px;
+
+  }
+  .gank-item-des text {
+    font-size: 22px;
+    color: rgba(0, 0, 0, 0.17)
+  }
+  .gank-item {
+    flex-direction: column;
+    flex: 1;
+
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+  .gank-item-divider {
+    align-content: flex-end;
+    background-color: #dddddd;
+    height:1px;
+    width:100%;
+    margin-top: 10px;
+  }
+</style>
+
+<script>
+  export default {
+    props: [
+        'itemUrl',
+        'itemDes',
+        'itemPublishedAt',
+        'itemWho'
+    ]
+  }
+</script>

@@ -1,6 +1,6 @@
 const CATEGORY_DAILY = "每日推荐"
 const CATEGORY_ANDROID = "Android"
-const CATEGORY_IOS = "IOS"
+const CATEGORY_IOS = "iOS"
 const CATEGORY_WEB = "前端"
 const CATEGORY_APP = "App"
 const CATEGORY_EXPAND_RES = "拓展资源"
