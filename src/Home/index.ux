@@ -10,7 +10,7 @@
       <tab-content  class="tab-content">
         <div class="tab-content-section" for="gankData">
           <block if="{{gankData[$idx].name === this.tabHeadList[0].title}}">
-            <tab-content-item-daily dailydata="dailyData"></tab-content-item-daily>
+            <tab-content-item-daily dailydata="{{dailyData}}"></tab-content-item-daily>
           </block>
           <block else>
               <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" contentdesc="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-item>
@@ -72,7 +72,7 @@
       list: ['A', 'B', 'C', 'D', 'E'],
       gankData:[],
       currentData:[],
-      dailyData: {},
+      dailyData: [],
     },
     onInit() {
       for(var x in this.tabHeadList){
@@ -80,6 +80,7 @@
         var t = this.tabHeadList[x].title
         this.gankData.push({name:t,value:new Array()});
       }
+
       this.changeTabIndex(0)
 
     },
@@ -120,9 +121,11 @@
                 //console.log(`拿到数据了：`)
                 //console.log(JSON.stringify(value))
                 var data = JSON.parse(value)
-                console.log(JSON.stringify(data.category))
-                //console.log('长度： '+JSON.stringify(data.results))
-                root.dailyData = data;
+
+                //root.dailyData = data;
+                root.setDailyData(data)
+                //console.log(JSON.stringify(root.dailyData.category))
+                //console.log('result: '+JSON.stringify(root.dailyData.results.Android))
               },
               function(error) {
 
@@ -156,11 +159,17 @@
           return;
         }
       }
-
-      // let currentElement = {};
-      // currentElement["name"] = name;
-      // currentElement["value"] = [];
-      // this.gankData.push(currentElement);
+    },
+    setDailyData(data) {
+      var tmp = [];
+      tmp.push({name:'福利',value:data.results.福利});
+      tmp.push({name:'Android',value:data.results.Android});
+      tmp.push({name:'iOS',value:data.results.iOS});
+      tmp.push({name:'App',value:data.results.App});
+      tmp.push({name:'休息视频',value:data.results.休息视频});
+      tmp.push({name:'拓展资源',value:data.results.拓展资源});
+      tmp.push({name:'瞎推荐',value:data.results.瞎推荐});
+      this.dailyData = tmp;
     }
   }
 </script>

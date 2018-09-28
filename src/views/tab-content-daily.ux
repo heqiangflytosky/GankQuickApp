@@ -2,8 +2,17 @@
 <import name="gank-item-header" src="../views/gank-item-header"></import>
 <template>
   <div class="tab-section">
-    <gank-item-header></gank-item-header>
-    <image class="content-benefit-image" src="http://ww2.sinaimg.cn/large/7a8aed7bgw1eutscfcqtcj20dw0i0q4l.jpg"></image>
+
+      <block for="item in dailydata">
+          <gank-item-header title="{{item.name}}"></gank-item-header>
+          <block if="item.name === '福利'">
+              <image class="content-benefit-image" src="http://ww2.sinaimg.cn/large/7a8aed7bgw1eutscfcqtcj20dw0i0q4l.jpg"></image>
+          </block>
+          <block else for="it in item.value">
+              <gank-item item-des="{{it.desc}}" item-url="{{it.url}}" item-who="{{it.who}}" item-published-at="{{it.publishedAt}}"></gank-item>
+          </block>
+      </block>
+
   </div>
 </template>
 
@@ -13,13 +22,20 @@
     align-items: center;
     margin: 0px;
   }
+  .content-section {
+    flex-direction: column;
+  }
+  .content-benefit-image {
+    height: 500px;
+  }
+  .tab-content {
+    flex: 1;
+    background-color: #eeeeee;
+  }
   .list-content {
     flex: 1;
     padding-left: 0px;
     padding-right: 0px;
-  }
-  .content-benefit-image {
-    height: 500px;
   }
 </style>
 
@@ -37,13 +53,14 @@
       'date'
     ],
     private: {
-      list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
+      listD: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
     },
     onInit () {
 
       // 监听属性变化
       this.$watch('currentIndex', 'watchCurrentIndex');
       console.log(`data = `+this.dailydata)
+      this.listD = ['A', 'B', 'C', 'D']
 
       //console.log(`data size = `+this.gankData.length)
     },
