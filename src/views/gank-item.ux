@@ -29,6 +29,7 @@
     margin-left: 24px;
     margin-right: 24px;
     font-size: 32px;
+    text-overflow: ellipsis;
   }
   .gank-item-des {
     flex-direction: row;

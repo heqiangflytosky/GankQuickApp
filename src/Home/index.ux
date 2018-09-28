@@ -1,4 +1,5 @@
 <import name="tab-content-item" src="../views/tab-content-section"></import>
+<import name="tab-content-item-daily" src="../views/tab-content-daily"></import>
 <template>
   <div class="home-page">
     <tabs onchange="onChangeTabIndex">
@@ -8,7 +9,12 @@
 
       <tab-content  class="tab-content">
         <div class="tab-content-section" for="gankData">
-          <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" contentdesc="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-item>
+          <block if="{{gankData[$idx].name === this.tabHeadList[0].title}}">
+            <tab-content-item-daily dailydata="dailyData"></tab-content-item-daily>
+          </block>
+          <block else>
+              <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" contentdesc="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-item>
+          </block>
         </div>
       </tab-content>
     </tabs>
@@ -55,7 +61,7 @@
     // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
     private: {
       tabHeadList: [
-        // {title: gankCategory.CATEGORY_DAILY},
+        {title: gankCategory.CATEGORY_DAILY},
         {title: gankCategory.CATEGORY_ANDROID},
         {title: gankCategory.CATEGORY_IOS},
         {title: gankCategory.CATEGORY_WEB},
@@ -66,6 +72,7 @@
       list: ['A', 'B', 'C', 'D', 'E'],
       gankData:[],
       currentData:[],
+      dailyData: {},
     },
     onInit() {
       for(var x in this.tabHeadList){
@@ -107,12 +114,23 @@
         var title = this.gankData[index].name
         console.log(`当前显示 ${title}`)
         if (title === gankCategory.CATEGORY_DAILY) {
-            console.log(`当前显示TTTTTTTTT`)
+            console.log(`获取`+gankCategory.CATEGORY_DAILY)
+            request.getGankDailyRecommandData()
+            .then(function(value) {
+                //console.log(`拿到数据了：`)
+                //console.log(JSON.stringify(value))
+                var data = JSON.parse(value)
+                console.log(JSON.stringify(data.category))
+                //console.log('长度： '+JSON.stringify(data.results))
+                root.dailyData = data;
+              },
+              function(error) {
+
+            })
         } else {
             request.getGankData(title, 10, 0)
             .then(function(value) {
                 console.log(`拿到数据了：`)
-                console.log(value)
                 console.log(JSON.stringify(value.data))
                 var data = JSON.parse(value.data)
                 //console.log(value.data.results)

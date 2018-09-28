@@ -1,11 +1,9 @@
 <import name="gank-item" src="../views/gank-item"></import>
+<import name="gank-item-header" src="../views/gank-item-header"></import>
 <template>
   <div class="tab-section">
-    <list class="list-content">
-          <list-item type="listItem" for="value in listdata">
-            <gank-item item-des="{{value.desc}}" item-url="{{value.url}}" item-who="{{value.who}}" item-published-at="{{value.publishedAt}}"></gank-item>
-          </list-item>
-    </list>
+    <gank-item-header></gank-item-header>
+    <image class="content-benefit-image" src="http://ww2.sinaimg.cn/large/7a8aed7bgw1eutscfcqtcj20dw0i0q4l.jpg"></image>
   </div>
 </template>
 
@@ -20,6 +18,9 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+  .content-benefit-image {
+    height: 500px;
+  }
 </style>
 
 <script>
@@ -29,10 +30,11 @@
 
     props: [
       'index',
-      'listdata',
+      'dailydata',
       // 驼峰式在赋值时使用-连接
       'currentIndex',
-      'contentdesc'
+      'contentdesc',
+      'date'
     ],
     private: {
       list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
@@ -41,7 +43,7 @@
 
       // 监听属性变化
       this.$watch('currentIndex', 'watchCurrentIndex');
-      console.log(`size = `+this.listdata.length)
+      console.log(`data = `+this.dailydata)
 
       //console.log(`data size = `+this.gankData.length)
     },

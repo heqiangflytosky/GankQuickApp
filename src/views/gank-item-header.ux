@@ -1,0 +1,31 @@
+<template>
+    <div class="gank-item-root">
+        <image src="{{imageurl}}"></image>
+        <text>{{title}}</text>
+    </div>
+</template>
+
+<style>
+  .gank-item-root {
+    flex-direction: row;
+    height: 150px;
+    flex: 1;
+  }
+  .gank-item-root image {
+    
+  }
+</style>
+
+<script>
+
+    export default {
+    props: [
+      'imageurl',
+      'title'
+    ],
+    onInit() {
+
+      },
+    }
+
+</script>

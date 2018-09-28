@@ -104,8 +104,39 @@ function fetchDataPromise(method, url) {
     })
 }
 
+function getGankDailyRecommandData() {
+    return getDayHistory()
+    .then(function(value) {
+        return new Promise(function(resolve, reject) {
+            var data = JSON.parse(value.data)
+            console.log('最新日期： '+data.results[0])
+            var dateStr = data.results[0];
+            // 格式 2018-09-19
+            var date = new Date(Date.parse(dateStr.replace(/-/g,  "/")));
+            var s = date.toJSON()
+
+            var paraData = {};
+            paraData.year = date.getFullYear()
+            paraData.month = date.getMonth()+1
+            paraData.date = date.getDate()
+            console.log('年： '+paraData.year+'月： '+paraData.month+'日： '+paraData.date)
+            resolve(paraData)
+        })
+      })
+      .then(function(value) {
+        return new Promise(function(resolve, reject) {
+            console.log('日期： year = '+value.year+", month = "+value.month+", date = "+value.date)
+            getGankDailyData(value.year,value.month,value.date)
+            .then(function(value) {
+                //var data = JSON.parse(value.data)
+                resolve(value.data)
+              })
+        })
+      })
+}
+
 export default {
-    getGankDailyData,
+    getGankDailyRecommandData,
     getDayHistory,
     getGankData
 }
