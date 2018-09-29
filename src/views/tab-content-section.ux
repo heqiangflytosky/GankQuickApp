@@ -1,9 +1,14 @@
 <import name="gank-item" src="../views/gank-item"></import>
 <template>
   <div class="tab-section">
-    <list class="list-content">
+    <list class="list-content" onscrollbottom="loadMoreData">
           <list-item type="listItem" for="value in listdata">
             <gank-item item-des="{{value.desc}}" item-url="{{value.url}}" item-who="{{value.who}}" item-published-at="{{value.publishedAt}}"></gank-item>
+          </list-item>
+              <!-- 加载更多，type属性自定义命名为loadMore -->
+          <list-item if="{{listdata.length > 0}}" type="loadMore" class="load-more">
+            <progress type="circular"></progress>
+            <text>加载更多</text>
           </list-item>
     </list>
   </div>
@@ -20,11 +25,19 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+  .load-more {
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-color: #bbbbbb;
+    border-bottom-width: 1px;
+  }
 </style>
 
 <script>
   import gankCategory from '../data/GankCategory.js'
   import request from '../utils/request.js'
+  import constans from '../data/Constants.js'
   export default {
 
     props: [
@@ -32,7 +45,7 @@
       'listdata',
       // 驼峰式在赋值时使用-连接
       'currentIndex',
-      'contentdesc'
+      'category'
     ],
     private: {
       list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
@@ -55,6 +68,26 @@
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)
         //this.listdata.push("F")
       }
+    },
+    loadMoreData () {
+      let root = this;
+      var pageIndex = this.listdata.length/constans.COMMON_REQUEST_PAGE_SIZE + 1;
+      console.log('加载第 '+pageIndex+' 页')
+      request.getGankData(this.category, constans.COMMON_REQUEST_PAGE_SIZE, pageIndex)
+            .then(function(value) {
+                //console.log('load more data:')
+                //console.log(JSON.stringify(value.data))
+                var data = JSON.parse(value.data)
+                //console.log(value.data.results)
+                console.log('长度： '+data.results.length)
+                //### App Framework ### 组件tab-content-item 禁止修改props中的：listdata!如需改变，请额外在data中使用另一个名称声明
+                root.listdata = root.listdata.concat(data.results)
+
+              },
+              function(error) {
+                // 处理请求出错逻辑
+
+              })
     }
   }
 

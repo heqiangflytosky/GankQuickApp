@@ -13,7 +13,7 @@
             <tab-content-item-daily dailydata="{{dailyData}}"></tab-content-item-daily>
           </block>
           <block else>
-              <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" contentdesc="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-item>
+              <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" category="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-item>
           </block>
         </div>
       </tab-content>
@@ -56,6 +56,7 @@
   import prompt from '@system.prompt'
   import request from '../utils/request.js'
   import gankCategory from '../data/GankCategory.js'
+  import constans from '../data/Constants.js'
 
   export default {
     // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
@@ -131,7 +132,7 @@
 
             })
         } else {
-            request.getGankData(title, 10, 0)
+            request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, 1)
             .then(function(value) {
                 console.log(`拿到数据了：`)
                 console.log(JSON.stringify(value.data))

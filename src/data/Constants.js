@@ -1,0 +1,5 @@
+const COMMON_REQUEST_PAGE_SIZE = 10;
+
+export default {
+    COMMON_REQUEST_PAGE_SIZE,
+}

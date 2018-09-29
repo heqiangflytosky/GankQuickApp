@@ -31,7 +31,7 @@ function httpRequestPromise(method, url) {
                     console.error("getNetWorkType error: ERROR_NETWORK_NONE");
                     reject(ERROR_CODE.ERROR_NETWORK_NONE)
                 } else {
-                    console.error("getNetWorkType success: "+JSON.stringify(data));
+                    console.log("getNetWorkType success: "+JSON.stringify(data));
                     resolve(data)
                 }
             },
@@ -46,8 +46,7 @@ function httpRequestPromise(method, url) {
                 method: method,
                 url:url,
                 success: function(data){
-                    
-                    console.log(JSON.stringify(data))
+                    //console.log(JSON.stringify(data))
                     if (data.code === 200) {
                         console.log("fetch sucess")
                         resolve(data)
@@ -74,7 +73,7 @@ function getNetWorkTypePromise() {
                     console.error("getNetWorkType error: ERROR_NETWORK_NONE");
                     reject(ERROR_CODE.ERROR_NETWORK_NONE)
                 } else {
-                    console.error("getNetWorkType success: "+JSON.stringify(data));
+                    console.log("getNetWorkType success: "+JSON.stringify(data));
                     resolve(data)
                 }
             },
@@ -93,7 +92,7 @@ function fetchDataPromise(method, url) {
             url:url,
             success: function(data){
                 console.log("fetch sucess")
-                console.log(JSON.stringify(data))
+                //console.log(JSON.stringify(data))
                 resolve(data)
             },
             fail: function(data, code) {
