@@ -4,9 +4,9 @@
   <div class="tab-section">
 
       <block for="item in dailydata">
-          <gank-item-header title="{{item.name}}"></gank-item-header>
+          <gank-item-header title="{{item.name}}" imageurl="{{getHeadIcon(item.name)}}"></gank-item-header>
           <block if="item.name === '福利'">
-              <image class="content-benefit-image" src="http://ww2.sinaimg.cn/large/7a8aed7bgw1eutscfcqtcj20dw0i0q4l.jpg"></image>
+              <image class="content-benefit-image" src="{{item.value[0].url}}"></image>
           </block>
           <block else for="it in item.value">
               <gank-item item-des="{{it.desc}}" item-url="{{it.url}}" item-who="{{it.who}}" item-published-at="{{it.publishedAt}}"></gank-item>
@@ -73,6 +73,24 @@
       if (parseInt(this.index) === this.currentIndex) {
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)
         //this.listdata.push("F")
+      }
+    },
+
+    getHeadIcon(name) {
+      if(name === gankCategory.HEADER_CATEGORY_BENEFIT){
+        return "/Common/ic-title-benefit.png"
+      } else if(name === gankCategory.HEADER_CATEGORY_ANDROID){
+        return "/Common/ic-title-android.png"
+      } else if(name === gankCategory.HEADER_CATEGORY_IOS){
+        return "/Common/ic-title-ios.png"
+      } else if(name === gankCategory.HEADER_CATEGORY_APP){
+        return "/Common/ic-title-app.png"
+      } else if(name === gankCategory.HEADER_CATEGORY_VIDEO){
+        return "/Common/ic-title-video.png"
+      } else if(name === gankCategory.HEADER_CATEGORY_EXPAND_RES){
+        return "/Common/ic-title-res.png"
+      } else if(name === gankCategory.HEADER_CATEGORY_RECOMMAND){
+        return "/Common/ic-title-recommand2.png"
       }
     }
   }

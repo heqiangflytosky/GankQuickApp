@@ -162,13 +162,13 @@
     },
     setDailyData(data) {
       var tmp = [];
-      tmp.push({name:'福利',value:data.results.福利});
-      tmp.push({name:'Android',value:data.results.Android});
-      tmp.push({name:'iOS',value:data.results.iOS});
-      tmp.push({name:'App',value:data.results.App});
-      tmp.push({name:'休息视频',value:data.results.休息视频});
-      tmp.push({name:'拓展资源',value:data.results.拓展资源});
-      tmp.push({name:'瞎推荐',value:data.results.瞎推荐});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_BENEFIT, value:data.results.福利});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_ANDROID, value:data.results.Android});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_IOS, value:data.results.iOS});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_APP, value:data.results.App});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_VIDEO, value:data.results.休息视频});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_EXPAND_RES, value:data.results.拓展资源});
+      tmp.push({name:gankCategory.HEADER_CATEGORY_RECOMMAND, value:data.results.瞎推荐});
       this.dailyData = tmp;
     }
   }
