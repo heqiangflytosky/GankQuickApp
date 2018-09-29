@@ -10,7 +10,8 @@
     { "name": "system.router" },
     { "name": "system.shortcut" },
     { "name": "system.fetch" },
-    {"name": "system.network"}
+    {"name": "system.network"},
+    {"name": "system.webview"}
   ],
   "permissions": [
     { "origin": "*" }
@@ -31,6 +32,9 @@
         "component": "index"
       },
       "About": {
+        "component": "index"
+      },
+      "Viewer": {
         "component": "index"
       }
     }
@@ -53,6 +57,13 @@
         "titleBarText": "详情页"
       },
       "About": {
+        "menu": false
+      },
+      "Viewer": {
+        "titleBar": true,
+        "titleBarText": "详情页",
+        "titleBarTextColor" :"#ffffff",
+        "titleBarBackgroundColor": "#508aeb",
         "menu": false
       }
     }

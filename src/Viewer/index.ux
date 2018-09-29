@@ -1,0 +1,26 @@
+<template>
+    <div>
+        <web src="{{propsUrl}}">
+        </web>
+    </div>
+
+</template>
+
+<style>
+
+</style>
+
+<script>
+    export default {
+        protected: {
+            url:'',
+            title:'',
+            propsUrl: "",
+        },
+        onInit() {
+            console.info('url = ' + this.url+", title = "+this.title);
+            this.propsUrl = this.url
+            this.$page.setTitleBar({ text: this.title })
+        },
+    }
+</script>
