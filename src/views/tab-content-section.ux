@@ -5,7 +5,8 @@
           <list-item type="listItem" for="value in listdata">
             <gank-item item-des="{{value.desc}}" item-url="{{value.url}}" item-who="{{value.who}}" item-published-at="{{value.publishedAt}}"></gank-item>
           </list-item>
-              <!-- 加载更多，type属性自定义命名为loadMore -->
+          
+          <!-- 加载更多，type属性自定义命名为loadMore -->
           <list-item if="{{listdata.length > 0}}" type="loadMore" class="load-more">
             <progress type="circular"></progress>
             <text>加载更多</text>

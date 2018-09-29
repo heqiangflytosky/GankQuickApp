@@ -117,16 +117,13 @@
         console.log(`当前显示 ${title}`)
         if (title === gankCategory.CATEGORY_DAILY) {
             console.log(`获取`+gankCategory.CATEGORY_DAILY)
-            request.getGankDailyRecommandData()
+            request.getGankToday()
             .then(function(value) {
                 //console.log(`拿到数据了：`)
                 //console.log(JSON.stringify(value))
-                var data = JSON.parse(value)
+                var data = JSON.parse(value.data)
 
-                //root.dailyData = data;
                 root.setDailyData(data)
-                //console.log(JSON.stringify(root.dailyData.category))
-                //console.log('result: '+JSON.stringify(root.dailyData.results.Android))
               },
               function(error) {
 

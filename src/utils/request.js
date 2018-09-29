@@ -3,14 +3,36 @@ import fetch from '@system.fetch'
 import errorCode from './error-code.js'
 import gankApi from'./gank-api.js'
 
+/**
+ * 获取特定日期网站数据
+ * @param {*} year 
+ * @param {*} month 
+ * @param {*} day 
+ */
 function getGankDailyData(year, month, day) {
     return getPromise(`${gankApi.GANK_BASE_URL}day/${year}/${month}/${day}`)
 }
 
+/**
+ * 获取发过干货日期接口
+ */
 function getDayHistory() {
     return getPromise(`${gankApi.GANK_BASE_URL}${gankApi.GANK_DAY_HISTORY}`)
 }
 
+/**
+ * 获取最新一天的干货
+ */
+function getGankToday() {
+    return getPromise(`${gankApi.GANK_BASE_URL}${gankApi.GANK_TODAY}`)
+}
+
+/**
+ * 获取分类数据的数据
+ * @param {*} category 分类
+ * @param {*} pageCount 每页数据个数
+ * @param {*} page 第几页
+ */
 function getGankData(category, pageCount, page) {
     return getPromise(`${gankApi.GANK_BASE_URL}data/${category}/${pageCount}/${page}`)
 }
@@ -128,14 +150,15 @@ function getGankDailyRecommandData() {
             getGankDailyData(value.year,value.month,value.date)
             .then(function(value) {
                 //var data = JSON.parse(value.data)
-                resolve(value.data)
+                resolve(value)
               })
         })
       })
 }
 
 export default {
-    getGankDailyRecommandData,
+    //getGankDailyRecommandData,
     getDayHistory,
+    getGankToday,
     getGankData
 }
