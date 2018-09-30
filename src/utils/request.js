@@ -51,7 +51,7 @@ function httpRequestPromise(method, url) {
             success: function(data){
                 if (data.type === 'none') {
                     console.error("getNetWorkType error: ERROR_NETWORK_NONE");
-                    reject(ERROR_CODE.ERROR_NETWORK_NONE)
+                    reject(errorCode.ERROR_NETWORK_NONE)
                 } else {
                     console.log("getNetWorkType success: "+JSON.stringify(data));
                     resolve(data)

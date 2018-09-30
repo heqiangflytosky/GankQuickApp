@@ -1,19 +1,48 @@
-
 <template>
     <div class="loading-root">
-        <progress type="circular"></progress>
-        <text>正在加载</text>
+        <div>
+            <progress type="circular" class="loading-progress"></progress>
+        </div>
+        <div>
+            <text>正在加载</text>
+        </div>
     </div>
 
 </template>
-    
+
 <style>
     .loading-root {
-        
+        flex-direction: column;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
     }
-    
+    .loading-root div {
+        justify-content: center;
+        width: 100%;
+    }
+    .loading-progress {
+        height:60px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 </style>
-    
+
 <script>
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>

@@ -129,7 +129,7 @@
                 root.setDailyData(data)
               },
               function(error) {
-
+                console.log(`getData +`+title+`error:`+error)
             })
         } else {
             request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, page)
@@ -143,7 +143,7 @@
 
               },
               function(error) {
-
+                console.log(`getData +`+title+`error:`+error)
               })
         }
     },
@@ -153,10 +153,11 @@
         var name = this.gankData[x].name;
         console.log('title =' +title+',name = '+ name)
         if(name === title){
-          for(var t in data.results){
-            console.log('t =' +t+',data = '+ data.results[t])
-            this.gankData[x].value.push(data.results[t]);
-          }
+          this.gankData[x].value = this.gankData[x].value.concat(data.results)
+          // for(var t in data.results){
+          //   console.log('t =' +t+',data = '+ data.results[t])
+          //   this.gankData[x].value.push(data.results[t]);
+          // }
           return;
         }
       }

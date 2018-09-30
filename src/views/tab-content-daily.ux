@@ -1,17 +1,24 @@
 <import name="gank-item" src="../views/gank-item"></import>
 <import name="gank-item-header" src="../views/gank-item-header"></import>
+<import name="loading-view" src="../views/loading-view"></import>
 <template>
   <div class="tab-section">
-
+    <block if="{{dailydata.length === 0}}">
+      <loading-view></loading-view>
+    </block>
+    <block else>
       <block for="item in dailydata">
-          <gank-item-header title="{{item.name}}" imageurl="{{getHeadIcon(item.name)}}"></gank-item-header>
-          <block if="item.name === '福利'">
-              <image class="content-benefit-image" src="{{item.value[0].url}}"></image>
-          </block>
-          <block else for="it in item.value">
-              <gank-item item-des="{{it.desc}}" item-url="{{it.url}}" item-who="{{it.who}}" item-published-at="{{it.publishedAt}}"></gank-item>
-          </block>
+        <gank-item-header title="{{item.name}}" imageurl="{{getHeadIcon(item.name)}}"></gank-item-header>
+        <block if="item.name === '福利'">
+          <image class="content-benefit-image" src="{{item.value[0].url}}"></image>
+        </block>
+        <block else for="it in item.value">
+          <gank-item item-des="{{it.desc}}" item-url="{{it.url}}" item-who="{{it.who}}" item-published-at="{{it.publishedAt}}"></gank-item>
+        </block>
       </block>
+    </block>
+
+
 
   </div>
 </template>
@@ -22,16 +29,20 @@
     align-items: center;
     margin: 0px;
   }
+
   .content-section {
     flex-direction: column;
   }
+
   .content-benefit-image {
     height: 800px;
   }
+
   .tab-content {
     flex: 1;
     background-color: #eeeeee;
   }
+
   .list-content {
     flex: 1;
     padding-left: 0px;
@@ -55,11 +66,11 @@
     private: {
       listD: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
     },
-    onInit () {
+    onInit() {
 
       // 监听属性变化
       this.$watch('currentIndex', 'watchCurrentIndex');
-      console.log(`data = `+this.dailydata)
+      console.log(`data = ` + this.dailydata)
       this.listD = ['A', 'B', 'C', 'D']
 
       //console.log(`data size = `+this.gankData.length)
@@ -69,7 +80,7 @@
      * @param newValue
      * @param oldValue
      */
-    watchCurrentIndex (newValue, oldValue) {
+    watchCurrentIndex(newValue, oldValue) {
       if (parseInt(this.index) === this.currentIndex) {
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)
         //this.listdata.push("F")
@@ -77,19 +88,19 @@
     },
 
     getHeadIcon(name) {
-      if(name === gankCategory.HEADER_CATEGORY_BENEFIT){
+      if (name === gankCategory.HEADER_CATEGORY_BENEFIT) {
         return "/Common/ic-title-benefit.png"
-      } else if(name === gankCategory.HEADER_CATEGORY_ANDROID){
+      } else if (name === gankCategory.HEADER_CATEGORY_ANDROID) {
         return "/Common/ic-title-android.png"
-      } else if(name === gankCategory.HEADER_CATEGORY_IOS){
+      } else if (name === gankCategory.HEADER_CATEGORY_IOS) {
         return "/Common/ic-title-ios.png"
-      } else if(name === gankCategory.HEADER_CATEGORY_APP){
+      } else if (name === gankCategory.HEADER_CATEGORY_APP) {
         return "/Common/ic-title-app.png"
-      } else if(name === gankCategory.HEADER_CATEGORY_VIDEO){
+      } else if (name === gankCategory.HEADER_CATEGORY_VIDEO) {
         return "/Common/ic-title-video.png"
-      } else if(name === gankCategory.HEADER_CATEGORY_EXPAND_RES){
+      } else if (name === gankCategory.HEADER_CATEGORY_EXPAND_RES) {
         return "/Common/ic-title-res.png"
-      } else if(name === gankCategory.HEADER_CATEGORY_RECOMMAND){
+      } else if (name === gankCategory.HEADER_CATEGORY_RECOMMAND) {
         return "/Common/ic-title-recommand2.png"
       }
     }
