@@ -1,0 +1,19 @@
+
+<template>
+    <div class="loading-root">
+        <progress type="circular"></progress>
+        <text>正在加载</text>
+    </div>
+
+</template>
+    
+<style>
+    .loading-root {
+        
+    }
+    
+</style>
+    
+<script>
+    
+</script>

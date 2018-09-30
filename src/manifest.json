@@ -28,9 +28,6 @@
       "Demo": {
         "component": "index"
       },
-      "DemoDetail": {
-        "component": "index"
-      },
       "About": {
         "component": "index"
       },
@@ -52,9 +49,6 @@
       "Demo": {
         "titleBarText": "示例页",
         "menu": false
-      },
-      "DemoDetail": {
-        "titleBarText": "详情页"
       },
       "About": {
         "menu": false

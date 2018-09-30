@@ -49,14 +49,15 @@
       'category'
     ],
     private: {
-      list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
+      list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'],
+      loadStatus: constans.STATUS_INIT_LOAD_LOADING,
     },
     onInit () {
 
       // 监听属性变化
       this.$watch('currentIndex', 'watchCurrentIndex');
       console.log(`size = `+this.listdata.length)
-
+      this.loadStatus = constans.STATUS_INIT_LOAD_LOADING
       //console.log(`data size = `+this.gankData.length)
     },
     /**
@@ -87,7 +88,6 @@
               },
               function(error) {
                 // 处理请求出错逻辑
-
               })
     }
   }

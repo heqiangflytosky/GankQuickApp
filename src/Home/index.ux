@@ -1,5 +1,5 @@
-<import name="tab-content-item" src="../views/tab-content-section"></import>
-<import name="tab-content-item-daily" src="../views/tab-content-daily"></import>
+<import name="tab-content-common" src="../views/tab-content-common"></import>
+<import name="tab-content-daily" src="../views/tab-content-daily"></import>
 <template>
   <div class="home-page">
     <tabs onchange="onChangeTabIndex">
@@ -10,10 +10,10 @@
       <tab-content  class="tab-content">
         <div class="tab-content-section" for="gankData">
           <block if="{{gankData[$idx].name === this.tabHeadList[0].title}}">
-            <tab-content-item-daily dailydata="{{dailyData}}"></tab-content-item-daily>
+            <tab-content-daily dailydata="{{dailyData}}"></tab-content-daily>
           </block>
           <block else>
-              <tab-content-item if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" category="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-item>
+              <tab-content-common if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" category="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-common>
           </block>
         </div>
       </tab-content>
@@ -89,7 +89,7 @@
     changeTabIndex(index) {
       const item = Object.assign({}, this.tabHeadList[index])
       if (!item.render) {
-        this.getData(index)
+        this.initData(index)
       }
       item.render = true
       this.tabHeadList.splice(index, 1, item)
@@ -111,16 +111,19 @@
     renderTabContent (index) {
       return !!this.tabHeadList[index].render
     },
-    getData(index) {
+    initData(index) {
+      var title = this.gankData[index].name
+      this.getData(title,1)
+    },
+    getData(title,page) {
         let root = this
-        var title = this.gankData[index].name
-        console.log(`当前显示 ${title}`)
+        console.log(`getData 当前显示 ${title}`)
         if (title === gankCategory.CATEGORY_DAILY) {
             console.log(`获取`+gankCategory.CATEGORY_DAILY)
             request.getGankToday()
             .then(function(value) {
-                //console.log(`拿到数据了：`)
-                //console.log(JSON.stringify(value))
+                console.log(`拿到数据了：`)
+                console.log(JSON.stringify(value))
                 var data = JSON.parse(value.data)
 
                 root.setDailyData(data)
@@ -129,7 +132,7 @@
 
             })
         } else {
-            request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, 1)
+            request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, page)
             .then(function(value) {
                 console.log(`拿到数据了：`)
                 console.log(JSON.stringify(value.data))
