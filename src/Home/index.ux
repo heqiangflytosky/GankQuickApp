@@ -67,7 +67,8 @@
         {title: gankCategory.CATEGORY_IOS},
         {title: gankCategory.CATEGORY_WEB},
         {title: gankCategory.CATEGORY_APP},
-        {title: gankCategory.CATEGORY_EXPAND_RES}
+        {title: gankCategory.CATEGORY_EXPAND_RES},
+        {title: gankCategory.CATEGORY_REST_VIDEO},
       ],
       currentIndex: 0,
       list: ['A', 'B', 'C', 'D', 'E'],
