@@ -75,7 +75,7 @@
       gankData:[],
       currentData:[],
       dailyData: [],
-      dailyStatus: 0,
+      dailyStatus: constans.STATUS_INIT_LOAD_LOADING,
     },
     onInit() {
       for(var x in this.tabHeadList){
@@ -135,11 +135,11 @@
                 var data = JSON.parse(value.data)
 
                 root.setDailyData(data)
-                root.dailyStatus = 2
+                root.dailyStatus = constans.STATUS_INIT_LOAD_SUCESS
               },
               function(error) {
                 console.log(`getData +`+title+`error:`+error)
-                root.dailyStatus = 1
+                root.dailyStatus = constans.STATUS_INIT_LOAD_ERROR
             })
         } else {
             request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, page)

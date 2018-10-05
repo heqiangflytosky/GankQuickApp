@@ -4,10 +4,10 @@
 <import name="error-view" src="../views/error-view"></import>
 <template>
   <div class="tab-section">
-    <block if="{{dailydata.length === 0 && status === 0}}">
+    <block if="{{showLoading()}}">
       <loading-view></loading-view>
     </block>
-    <block else if="{{dailydata.length === 0 && status === 1}}">
+    <block else if="{{showLoadError()}}">
       <error-view></error-view>
     </block>
     <block else>
@@ -54,6 +54,7 @@
 <script>
   import gankCategory from '../data/GankCategory.js'
   import request from '../utils/request.js'
+  import constans from '../data/Constants.js'
   export default {
 
     props: [
@@ -85,8 +86,15 @@
     watchCurrentIndex(newValue, oldValue) {
       if (parseInt(this.index) === this.currentIndex) {
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)
-        //this.listdata.push("F")
       }
+    },
+
+    showLoading() {
+      return this.dailydata.length === 0 && this.status === constans.STATUS_INIT_LOAD_LOADING;
+    },
+
+    showLoadError() {
+      return this.dailydata.length === 0 && this.status === constans.STATUS_INIT_LOAD_ERROR
     },
 
     getHeadIcon(name) {
