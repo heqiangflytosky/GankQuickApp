@@ -25,9 +25,6 @@
       "Home": {
         "component": "index"
       },
-      "Demo": {
-        "component": "index"
-      },
       "About": {
         "component": "index"
       },
@@ -45,10 +42,6 @@
       "Home": {
         "titleBar": false,
         "titleBarBackgroundColor": "#508aeb"
-      },
-      "Demo": {
-        "titleBarText": "示例页",
-        "menu": false
       },
       "About": {
         "menu": false
