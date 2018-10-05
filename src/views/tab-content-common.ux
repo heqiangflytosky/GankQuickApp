@@ -96,6 +96,7 @@
         },
           function (error) {
             // 处理请求出错逻辑
+            console.error('load more data error')
           })
     }
   }

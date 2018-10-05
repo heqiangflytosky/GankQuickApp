@@ -1,10 +1,14 @@
 <import name="gank-item" src="../views/gank-item"></import>
 <import name="gank-item-header" src="../views/gank-item-header"></import>
 <import name="loading-view" src="../views/loading-view"></import>
+<import name="error-view" src="../views/error-view"></import>
 <template>
   <div class="tab-section">
-    <block if="{{dailydata.length === 0}}">
+    <block if="{{dailydata.length === 0 && status === 0}}">
       <loading-view></loading-view>
+    </block>
+    <block else if="{{dailydata.length === 0 && status === 1}}">
+      <error-view></error-view>
     </block>
     <block else>
       <block for="item in dailydata">
@@ -58,7 +62,8 @@
       // 驼峰式在赋值时使用-连接
       'currentIndex',
       'contentdesc',
-      'date'
+      'date',
+      'status',
     ],
     private: {
       listD: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
@@ -70,7 +75,7 @@
       console.log(`data = ` + this.dailydata)
       this.listD = ['A', 'B', 'C', 'D']
 
-      //console.log(`data size = `+this.gankData.length)
+      console.log(`status = `+this.status)
     },
     /**
      * 监听用户选择的索引，选中当前时触发业务逻辑
