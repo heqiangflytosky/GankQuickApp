@@ -13,7 +13,7 @@
             <tab-content-daily dailydata="{{dailyData}}" status="{{dailyStatus}}"></tab-content-daily>
           </block>
           <block else>
-              <tab-content-common if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" category="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}"></tab-content-common>
+              <tab-content-common if="{{ renderTabContent($idx) }}" index="{{$idx}}" current-index="{{currentIndex}}" category="{{gankData[$idx].name}}" listdata="{{gankData[$idx].value}}" status="{{gankData[$idx].status}}"></tab-content-common>
           </block>
         </div>
       </tab-content>
@@ -81,7 +81,7 @@
       for(var x in this.tabHeadList){
         //var data = new Array()
         var t = this.tabHeadList[x].title
-        this.gankData.push({name:t,value:new Array()});
+        this.gankData.push({name:t,value:new Array(),status:constans.STATUS_INIT_LOAD_LOADING});
       }
 
       this.changeTabIndex(0)
@@ -127,7 +127,7 @@
         console.log(`getData 当前显示 ${title}`)
         if (title === gankCategory.CATEGORY_DAILY) {
             console.log(`获取`+gankCategory.CATEGORY_DAILY)
-            this.dailyStatus=0
+            this.dailyStatus=constans.STATUS_INIT_LOAD_LOADING
             request.getGankToday()
             .then(function(value) {
                 console.log(`拿到数据了：`)
@@ -142,28 +142,43 @@
                 root.dailyStatus = constans.STATUS_INIT_LOAD_ERROR
             })
         } else {
-            request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, page)
-            .then(function(value) {
-                console.log(`拿到数据了：`)
-                //console.log(JSON.stringify(value.data))
-                var data = JSON.parse(value.data)
-                //console.log(value.data.results)
-                console.log('长度： '+data.results.length)
-                root.setData(title, data)
-
-              },
-              function(error) {
-                console.error(`getData +`+title+`error:`+ error)
+          this.setLoadStatus(title, constans.STATUS_INIT_LOAD_LOADING)
+          request.getGankData(title, constans.COMMON_REQUEST_PAGE_SIZE, page)
+            .then(function (value) {
+              console.log(`拿到数据了：`)
+              //console.log(JSON.stringify(value.data))
+              var data = JSON.parse(value.data)
+              //console.log(value.data.results)
+              console.log('长度： ' + data.results.length)
+              root.setData(title, data)
+            },
+              function (error) {
+                console.error(`getData +` + title + `error:` + error)
+                root.setLoadStatus(title, constans.STATUS_INIT_LOAD_ERROR)
               })
         }
     },
     setData(title, data) {
-      var curdata;
       for(var x in this.gankData){
         var name = this.gankData[x].name;
         console.log('title =' +title+',name = '+ name)
         if(name === title){
           this.gankData[x].value = this.gankData[x].value.concat(data.results)
+          this.gankData[x].status = constans.STATUS_INIT_LOAD_SUCESS
+          // for(var t in data.results){
+          //   console.log('t =' +t+',data = '+ data.results[t])
+          //   this.gankData[x].value.push(data.results[t]);
+          // }
+          return;
+        }
+      }
+    },
+    setLoadStatus(title,status) {
+      for(var x in this.gankData){
+        var name = this.gankData[x].name;
+        console.log('title =' +title+',name = '+ name)
+        if(name === title){
+          this.gankData[x].status = status
           // for(var t in data.results){
           //   console.log('t =' +t+',data = '+ data.results[t])
           //   this.gankData[x].value.push(data.results[t]);

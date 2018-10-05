@@ -1,9 +1,13 @@
 <import name="gank-item" src="../views/gank-item"></import>
 <import name="loading-view" src="../views/loading-view"></import>
+<import name="error-view" src="../views/error-view"></import>
 <template>
   <div class="tab-section">
-    <block if="listdata.length === 0">
+    <block if="showLoading()">
       <loading-view></loading-view>
+    </block>
+    <block else if="showLoadError()">
+      <error-view></error-view>
     </block>
     <block else>
       <list class="list-content" onscrollbottom="loadMoreData">
@@ -54,7 +58,8 @@
       'listdata',
       // 驼峰式在赋值时使用-连接
       'currentIndex',
-      'category'
+      'category',
+      'status',
     ],
     private: {
       list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'],
@@ -78,6 +83,15 @@
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)
         //this.listdata.push("F")
       }
+    },
+    showLoading() {
+      console.log(`showLoading = ` + this.listdata.status)
+      return this.listdata.length === 0 && this.status === constans.STATUS_INIT_LOAD_LOADING;
+    },
+
+    showLoadError() {
+      console.log(`showLoadError = ` + this.listdata.status)
+      return this.listdata.length === 0 && this.status === constans.STATUS_INIT_LOAD_ERROR
     },
     loadMoreData() {
       let root = this;
