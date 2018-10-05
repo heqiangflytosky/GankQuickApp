@@ -45,45 +45,8 @@ function httpRequestPromise(method, url) {
     console.log(url)
     // 这种方式不行，不会按先后顺序执行
     //return getNetWorkTypePromise().then(fetchDataPromise(method, url))
-
-    return new Promise(function(resolve, reject){
-        network.getType({
-            success: function(data){
-                if (data.type === 'none') {
-                    console.error("getNetWorkType error: ERROR_NETWORK_NONE");
-                    reject(errorCode.ERROR_NETWORK_NONE)
-                } else {
-                    console.log("getNetWorkType success: "+JSON.stringify(data));
-                    resolve(data)
-                }
-            },
-            fail: function(data){
-                console.error("getNetWorkType error: fail");
-                reject(data)
-            }
-        })
-    }).then(function(value) {
-        return new Promise(function(resolve, reject) {
-            fetch.fetch({
-                method: method,
-                url:url,
-                success: function(data){
-                    //console.log(JSON.stringify(data))
-                    if (data.code === 200) {
-                        console.log("fetch sucess")
-                        resolve(data)
-                    } else {
-                        console.log("fetch error")
-                        reject(data.code)
-                    }
-                    
-                },
-                fail: function(data, code) {
-                    console.log("fetch fail")
-                    reject(code)
-                }
-            })
-        })
+    return getNetWorkTypePromise().then(function(value){
+        return fetchDataPromise(method, url)
     })
 }
 
@@ -93,7 +56,7 @@ function getNetWorkTypePromise() {
             success: function(data){
                 if (data.type === 'none') {
                     console.error("getNetWorkType error: ERROR_NETWORK_NONE");
-                    reject(ERROR_CODE.ERROR_NETWORK_NONE)
+                    reject(errorCode.ERROR_NETWORK_NONE)
                 } else {
                     console.log("getNetWorkType success: "+JSON.stringify(data));
                     resolve(data)
@@ -113,9 +76,15 @@ function fetchDataPromise(method, url) {
             method: method,
             url:url,
             success: function(data){
-                console.log("fetch sucess")
                 //console.log(JSON.stringify(data))
-                resolve(data)
+                if (data.code === 200) {
+                    console.log("fetch sucess")
+                    resolve(data)
+                } else {
+                    console.log("fetch error")
+                    reject(data.code)
+                }
+                
             },
             fail: function(data, code) {
                 console.log("fetch fail")
