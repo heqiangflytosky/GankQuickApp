@@ -86,11 +86,19 @@
 
       this.changeTabIndex(0)
       this.$on('reload', this.reloadEventHandler);
+      this.$on('loadMore', this.loadMoreEventHandler);
     },
 
     reloadEventHandler (evt) {
       console.log(JSON.stringify(evt))
       this.initData(this.currentIndex)
+    },
+
+    loadMoreEventHandler (evt) {
+      console.log(JSON.stringify(evt))
+      var title = evt.detail.title
+      var pageIndex = evt.detail.page
+      this.getData(title, pageIndex)
     },
 
     changeTabIndex(index) {
@@ -154,7 +162,9 @@
             },
               function (error) {
                 console.error(`getData +` + title + `error:` + error)
-                root.setLoadStatus(title, constans.STATUS_INIT_LOAD_ERROR)
+                if (page === 1) {
+                  root.setLoadStatus(title, constans.STATUS_INIT_LOAD_ERROR)
+                }
               })
         }
     },

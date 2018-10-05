@@ -78,11 +78,7 @@
 
       console.log(`status = `+this.status)
     },
-    /**
-     * 监听用户选择的索引，选中当前时触发业务逻辑
-     * @param newValue
-     * @param oldValue
-     */
+
     watchCurrentIndex(newValue, oldValue) {
       if (parseInt(this.index) === this.currentIndex) {
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)

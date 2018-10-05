@@ -73,11 +73,7 @@
       this.loadStatus = constans.STATUS_INIT_LOAD_LOADING
       //console.log(`data size = `+this.gankData.length)
     },
-    /**
-     * 监听用户选择的索引，选中当前时触发业务逻辑
-     * @param newValue
-     * @param oldValue
-     */
+
     watchCurrentIndex(newValue, oldValue) {
       if (parseInt(this.index) === this.currentIndex) {
         console.debug(`当前用户选择了这个标签：${this.index}, ${newValue}, ${oldValue}`)
@@ -85,33 +81,38 @@
       }
     },
     showLoading() {
-      console.log(`showLoading = ` + this.listdata.status)
+      console.log(`showLoading = ` + this.status)
       return this.listdata.length === 0 && this.status === constans.STATUS_INIT_LOAD_LOADING;
     },
 
     showLoadError() {
-      console.log(`showLoadError = ` + this.listdata.status)
+      console.log(`showLoadError = ` + this.status)
       return this.listdata.length === 0 && this.status === constans.STATUS_INIT_LOAD_ERROR
     },
+    
     loadMoreData() {
       let root = this;
       var pageIndex = this.listdata.length / constans.COMMON_REQUEST_PAGE_SIZE + 1;
       console.log('加载第 ' + pageIndex + ' 页')
-      request.getGankData(this.category, constans.COMMON_REQUEST_PAGE_SIZE, pageIndex)
-        .then(function (value) {
-          //console.log('load more data:')
-          //console.log(JSON.stringify(value.data))
-          var data = JSON.parse(value.data)
-          //console.log(value.data.results)
-          console.log('长度： ' + data.results.length)
-          //### App Framework ### 组件tab-content-item 禁止修改props中的：listdata!如需改变，请额外在data中使用另一个名称声明
-          root.listdata = root.listdata.concat(data.results)
+      this.$dispatch('loadMore', { title: this.category ,page: pageIndex})
 
-        },
-          function (error) {
-            // 处理请求出错逻辑
-            console.error('load more data error')
-          })
+      // ### App Framework ### 组件tab-content-item 禁止修改props中的：listdata!如需改变，请额外在data中使用另一个名称声明 
+
+      // request.getGankData(this.category, constans.COMMON_REQUEST_PAGE_SIZE, pageIndex)
+      //   .then(function (value) {
+      //     //console.log('load more data:')
+      //     //console.log(JSON.stringify(value.data))
+      //     var data = JSON.parse(value.data)
+      //     //console.log(value.data.results)
+      //     console.log('长度： ' + data.results.length)
+      //     //### App Framework ### 组件tab-content-item 禁止修改props中的：listdata!如需改变，请额外在data中使用另一个名称声明
+      //     root.listdata = root.listdata.concat(data.results)
+
+      //   },
+      //     function (error) {
+      //       // 处理请求出错逻辑
+      //       console.error('load more data error')
+      //     })
     }
   }
 
