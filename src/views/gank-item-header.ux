@@ -1,36 +1,23 @@
 <template>
-    <div class="gank-item-root">
-      <div class="gank-item-header-title">
-          <image src="{{imageurl}}"></image>
-          <text>{{title}}</text>
-      </div>
-
-      <text class="gank-item-divider"></text>
-    </div>
+  <div id="gank-item-header-title">
+    <image src="{{imageurl}}"></image>
+    <text>{{title}}</text>
+  </div>
 </template>
 
 <style>
-  .gank-item-root {
-    flex-direction: column;
-    flex: 1;
-    background-color:#dddddd
-  }
-  .gank-item-header-title {
+  #gank-item-header-title {
     flex-direction: row;
-    margin-left: 24px;
-    margin-top: 24px;
-    margin-bottom: 16px;
+    width:100%;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-bottom: 16px;
+    background-color:#dddddd;
   }
-  .gank-item-header-title text{
+  #gank-item-header-title text{
     font-size: 28px;
     font-weight: bold;
     margin-left: 10px;
-  }
-  .gank-item-divider {
-    align-content: flex-end;
-    background-color: #dddddd;
-    height:2px;
-    width:100%;
   }
 </style>
 

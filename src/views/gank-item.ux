@@ -7,7 +7,6 @@
       <image src="/Common/ic_content_time.png" style="margin-left: 12px;"></image>
       <text>{{this.formatPublishedTime(itemPublishedAt)}}</text>
     </div>
-    <text class="gank-item-divider"></text>
   </div>
 </template>
 
@@ -16,6 +15,10 @@
     flex-direction: column;
     height: 150px;
     flex: 1;
+    width:100%;
+    border-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#dddddd;
   }
   .gank-item-title {
     flex-direction: column;
@@ -46,12 +49,6 @@
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 0px;
-  }
-  .gank-item-divider {
-    align-content: flex-end;
-    background-color: #dddddd;
-    height:1px;
-    width:100%;
   }
 </style>
 
