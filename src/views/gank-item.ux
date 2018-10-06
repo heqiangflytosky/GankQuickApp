@@ -16,7 +16,6 @@
     flex-direction: column;
     height: 150px;
     flex: 1;
-
   }
   .gank-item-title {
     flex-direction: column;
@@ -44,7 +43,6 @@
   .gank-item {
     flex-direction: column;
     flex: 1;
-
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 0px;
@@ -54,7 +52,6 @@
     background-color: #dddddd;
     height:1px;
     width:100%;
-
   }
 </style>
 

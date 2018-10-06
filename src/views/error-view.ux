@@ -19,12 +19,9 @@
 </style>
 
 <script>
-  export default{
-      reload() {
-        console.log('reload')
-        this.$dispatch('reload', { params: '' })
-      }
-  }
-
-
+    export default {
+        reload() {
+            this.$dispatch('reload', { params: '' })
+        }
+    }
 </script>

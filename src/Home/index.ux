@@ -79,7 +79,6 @@
     },
     onInit() {
       for(var x in this.tabHeadList){
-        //var data = new Array()
         var t = this.tabHeadList[x].title
         this.gankData.push({name:t,value:new Array(),status:constans.STATUS_INIT_LOAD_LOADING});
       }

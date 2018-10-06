@@ -2,6 +2,7 @@
 <import name="gank-item-header" src="../views/gank-item-header"></import>
 <import name="loading-view" src="../views/loading-view"></import>
 <import name="error-view" src="../views/error-view"></import>
+
 <template>
   <div class="tab-section">
     <block if="{{showLoading()}}">
@@ -55,8 +56,8 @@
   import gankCategory from '../data/GankCategory.js'
   import request from '../utils/request.js'
   import constans from '../data/Constants.js'
-  export default {
 
+  export default {
     props: [
       'index',
       'dailydata',
@@ -66,17 +67,9 @@
       'date',
       'status',
     ],
-    private: {
-      listD: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
-    },
     onInit() {
-
       // 监听属性变化
       this.$watch('currentIndex', 'watchCurrentIndex');
-      console.log(`data = ` + this.dailydata)
-      this.listD = ['A', 'B', 'C', 'D']
-
-      console.log(`status = `+this.status)
     },
 
     watchCurrentIndex(newValue, oldValue) {
