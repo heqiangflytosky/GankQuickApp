@@ -25,6 +25,7 @@
     .loading-progress {
         height:60px;
         width: 100%;
+        color: #508aeb;
         margin-bottom: 10px;
     }
 </style>

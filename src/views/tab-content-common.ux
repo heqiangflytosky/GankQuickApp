@@ -17,7 +17,7 @@
 
         <!-- 加载更多，type属性自定义命名为loadMore -->
         <list-item if="{{listdata.length > 0}}" type="loadMore" class="load-more">
-          <progress type="circular"></progress>
+          <progress type="circular" style="color: #508aeb;"></progress>
           <text>加载更多</text>
         </list-item>
       </list>
