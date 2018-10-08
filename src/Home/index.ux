@@ -198,13 +198,31 @@
     },
     setDailyData(data) {
       var tmp = [];
-      tmp.push({name:gankCategory.HEADER_CATEGORY_BENEFIT, value:data.results.福利});
-      tmp.push({name:gankCategory.HEADER_CATEGORY_ANDROID, value:data.results.Android});
-      tmp.push({name:gankCategory.HEADER_CATEGORY_IOS, value:data.results.iOS});
-      tmp.push({name:gankCategory.HEADER_CATEGORY_APP, value:data.results.App});
-      tmp.push({name:gankCategory.HEADER_CATEGORY_VIDEO, value:data.results.休息视频});
-      tmp.push({name:gankCategory.HEADER_CATEGORY_EXPAND_RES, value:data.results.拓展资源});
-      tmp.push({name:gankCategory.HEADER_CATEGORY_RECOMMAND, value:data.results.瞎推荐});
+      
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_BENEFIT) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_BENEFIT, value:data.results.福利});
+      }
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_ANDROID) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_ANDROID, value:data.results.Android});
+      }
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_IOS) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_IOS, value:data.results.iOS});
+      }
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_APP) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_APP, value:data.results.App});
+      }
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_VIDEO) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_VIDEO, value:data.results.休息视频});
+      }
+
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_EXPAND_RES) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_EXPAND_RES, value:data.results.拓展资源});
+      }
+
+      if (data.category.indexOf(gankCategory.HEADER_CATEGORY_RECOMMAND) > -1) {
+        tmp.push({name:gankCategory.HEADER_CATEGORY_RECOMMAND, value:data.results.瞎推荐});
+      }
+
       this.dailyData = tmp;
     }
   }
