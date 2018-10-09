@@ -87,7 +87,7 @@
     
     loadMoreData() {
       let root = this;
-      var pageIndex = this.listdata.length / constans.COMMON_REQUEST_PAGE_SIZE + 1;
+      let pageIndex = this.listdata.length / constans.COMMON_REQUEST_PAGE_SIZE + 1;
       console.log('加载第 ' + pageIndex + ' 页')
       this.$dispatch('loadMore', { title: this.category ,page: pageIndex})
 

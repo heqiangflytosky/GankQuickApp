@@ -74,21 +74,21 @@
         // time 日期格式：2018-09-19T00:00:00.0Z
         // UTC 格式
 
-        var cDate = new Date();
-        var curYear = cDate.getFullYear();
-        var curMonth = cDate.getMonth();
-        var curDate = cDate.getDate();
-        var curHour = cDate.getHours();
-        var curMin = cDate.getMinutes();
-        var curSec = cDate.getSeconds();
+        let cDate = new Date();
+        let curYear = cDate.getFullYear();
+        let curMonth = cDate.getMonth();
+        let curDate = cDate.getDate();
+        let curHour = cDate.getHours();
+        let curMin = cDate.getMinutes();
+        let curSec = cDate.getSeconds();
 
-        var pDate = new Date(Date.parse(time));
-        var pubYear = pDate.getFullYear();
-        var pubMonth = pDate.getMonth();
-        var pubDate = pDate.getDate();
-        var pubHour = pDate.getHours();
-        var pubMin = pDate.getMinutes();
-        var pubSec = pDate.getSeconds();
+        let pDate = new Date(Date.parse(time));
+        let pubYear = pDate.getFullYear();
+        let pubMonth = pDate.getMonth();
+        let pubDate = pDate.getDate();
+        let pubHour = pDate.getHours();
+        let pubMin = pDate.getMinutes();
+        let pubSec = pDate.getSeconds();
 
         if (pubYear < curYear) {
             return (curYear - pubYear) + "年前";

@@ -98,14 +98,14 @@ function getGankDailyRecommandData() {
     return getDayHistory()
     .then(function(value) {
         return new Promise(function(resolve, reject) {
-            var data = JSON.parse(value.data)
+            let data = JSON.parse(value.data)
             console.log('最新日期： '+data.results[0])
-            var dateStr = data.results[0];
+            let dateStr = data.results[0];
             // 格式 2018-09-19
-            var date = new Date(Date.parse(dateStr.replace(/-/g,  "/")));
-            var s = date.toJSON()
+            let date = new Date(Date.parse(dateStr.replace(/-/g,  "/")));
+            let s = date.toJSON()
 
-            var paraData = {};
+            let paraData = {};
             paraData.year = date.getFullYear()
             paraData.month = date.getMonth()+1
             paraData.date = date.getDate()

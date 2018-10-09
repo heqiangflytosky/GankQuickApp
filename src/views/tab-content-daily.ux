@@ -18,7 +18,8 @@
           <image class="content-benefit-image" src="{{item.value[0].url}}"></image>
         </block>
         <block else for="it in item.value">
-          <gank-item item-des="{{it.desc}}" item-url="{{it.url}}" item-who="{{it.who}}" item-published-at="{{it.publishedAt}}"></gank-item>
+          <gank-item item-des="{{it.desc}}" item-url="{{it.url}}" item-who="{{it.who}}" 
+            item-published-at="{{it.publishedAt}}"></gank-item>
         </block>
       </block>
     </block>
