@@ -39,6 +39,7 @@
 
   .content-benefit-image {
     height: 800px;
+    width:600px;
   }
 
   .tab-content {
